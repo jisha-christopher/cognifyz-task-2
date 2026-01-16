@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>User Registration</title>
+
+  <!-- Inline CSS -->
+  <style>
+    body {
+      font-family: Arial;
+      background-color: #f2f2f2;
+    }
+    .container {
+      width: 400px;
+      margin: 50px auto;
+      background: white;
+      padding: 20px;
+      border-radius: 5px;
+    }
+    input, button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+    }
+    button {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    .error {
+      color: red;
+      font-size: 14px;
+    }
+  </style>
+
+  <!-- Inline JavaScript -->
+  <script>
+    function validateForm() {
+      let name = document.forms["userForm"]["name"].value;
+      let email = document.forms["userForm"]["email"].value;
+      let age = document.forms["userForm"]["age"].value;
+      let error = "";
+
+      if (name === "") {
+        error = "Name is required";
+      } else if (!email.includes("@")) {
+        error = "Enter a valid email";
+      } else if (age < 18) {
+        error = "Age must be 18 or above";
+      }
+
+      if (error !== "") {
+        document.getElementById("errorMsg").innerText = error;
+        return false;
+      }
+      return true;
+    }
+  </script>
+</head>
+
+<body>
+  <div class="container">
+    <h2>User Registration</h2>
+
+    <form name="userForm" action="/submit" method="POST" onsubmit="return validateForm()">
+      <input type="text" name="name" placeholder="Enter Name">
+      <input type="email" name="email" placeholder="Enter Email">
+      <input type="number" name="age" placeholder="Enter Age">
+      <button type="submit">Submit</button>
+    </form>
+
+    <p id="errorMsg" class="error"></p>
+  </div>
+</body>
+</html>
